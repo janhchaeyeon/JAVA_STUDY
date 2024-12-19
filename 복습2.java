@@ -1,62 +1,92 @@
-package java_study_1217;
+package java_study_1219;
 
-class 식당{
-	String 식당이름;
-	String 음식타입; //중식, 일식, 한식..
-	
-	/*
-	 * 메소드(or 생성자) 이름은 동일한데, 파라미터 타입만 다르면
-	 * 메소드이름을 중복해서 사용할 수 있음. ==> 오버로딩(overloading)
-	 */
-	
-	
-	public 식당() { //디폴트 생성자
-		
+/*
+ * *상속(다형성)*
+ * 
+ */
+
+class X {
+
+	int money;
+
+	public X() {
+
 	}
-	public 식당(String 식당이름, String 음식타입) {
-		//this.식당이름 : 필드변수를 가르킴.
-		this.식당이름 = 식당이름;
-		this.음식타입 = 음식타입;
-		
+
+	public X(int money) {
+		this.money = money;
+
 	}
-	
-	
-	//출력용 메소드 만들어보기
-	public void 식당이름출력하다() {
-		//void : return이 없다.
-		System.out.println("식당명 : " + this.식당이름);
-		System.out.println("타입 : " + this.음식타입);
-		
+
+	public void showMeTheMoney() {
+		System.out.println("my money : " + this.money + "$");
+
 	}
-	
 }
 
+class B { // B클래스 새로 등장
 
+	public void showMeTheMoney() {
+		System.out.println("my money : " + 1000000000 + "$");
+
+	}
+}
+// extends : 상속하다
+//아쉽게도 Java는 다중상속이 불가능합니다.(C++,Python 다중상속을 지원합니다.)
+	class Y extends X { // Y클래스가 X클래스를 상속받다.
+		// Y클래스는 X클래스의 필드변수와 메소드를 사용할 수 있다.
+		int myMoney = 1000;
+
+		// 부모클래스에서 기본생성자를 수정했다면 자식클래스 생성자에서 부모클래스 생성자를 무조건 호출해야한다.
+
+		public Y() {
+			super(40000); // super -> ' public X(int money) {}' 10000이 money로 대입
+		}
+
+		/*
+		 * int를 리턴하는 getMyMoney 메소드
+		 * 
+		 */
+		public int getMymony() {
+			return this.myMoney;
+
+		}
+
+		@Override // 부모클래스에 정의된 정의된 메소드 '재정의(오버라이딩)'
+		public void showMeTheMoney() {
+			System.out.println("my(Y) money : " + 900000 + "$");
+		}
+
+		public void showMessage() { // 리턴값이 없는 void 메소드
+			System.out.println("안녕하세요, Y입니다.");
+		}
+	}
 
 public class 복습2 {
 
 	public static void main(String[] args) {
 		
-		식당 a = new 식당();//기본 생성자 선택
-		a.식당이름 = "스바라시봉명점";
-		a.음식타입 = "일식";
-		//System.out.println(a.식당이름);
-		//System.out.println(a.음식타입);
-		a.식당이름출력하다();
-		
-		식당 b = new 식당("맛찬들", "한식");//파라미터가 있는 생성자 선택
-		//System.out.println(b.식당이름);
-		//System.out.println(b.음식타입);
-		b.식당이름출력하다(); //메소드를 이용해서 코드량 줄이기
+		X x = new X(); //X클래스 호출(객체 생성 or 인스턴스화)
+		x.showMeTheMoney();
+		//x는 showMessage가 없음
+		//부모클래스는 자식클래스의 메소드와 필드변수를 사용할 수 없음
 		
 		/*
-		 * 메소드
-		 * 1. 코드량 줄이기 가능
-		 * 2. 코드 재사용성 증가
-		 * 3. 코드 유지보수 & 협업
+		 * 자식은 부모의 메소드와 필드변수를 사용할 수 있지만
+		 * 부모는 자식클래스의 메소드와 필드변수를 사용할 수 없다.
 		 */
 		
-
+		
+		Y y = new Y(); //Y클래스 호출
+		y.showMeTheMoney(); //X클래스에서 정의된 메소드 사용
+		y.showMessage();
+		
+		
+		int result = y.getMymony(); //리턴타입이 있는 메소드 호출
+		//result라는 변수에 getMyMoney 최종값을 리턴받음.
+		System.out.println("result : " + result);
+		
+		
 	}
 
-}
+ }

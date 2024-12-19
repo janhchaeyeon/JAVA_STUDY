@@ -1,165 +1,61 @@
-package java_study_1217;
+package java_study_1219;
 
 /*
- *객체지향 개념 
- * 클래스는
- * 필드변수(전역변수), 메소드, 생성자(리터타입이 없는 메소드)로 구성됨
+ * 객체지향 언어(Java, C++, Python, C#...)의 특징
  */
 
-class 자동차{
-	
-	String 브랜드명; //필드변수(전역변수)
-	String 자동차타입;
-	
-	
+class A{//클래스 'A'
 	/*
-	 * 필드변수
-	 * 1. default 초기값이 존재(ex. String은 null 값이 자동으로 대입, int는 0값이 자동으로 대입)
-	 * 2. 모든 메소드에서 필드변수를 사용할 수 있음.
-	 * 3. 필드변수 == 속성(attribute) (실무에서는 속성)
+	 * 1. 필드변수
+	 * 2. 기본(default) 생성자
+	 * 3. 메소드
+	 * 
 	 */
+	int x; //필드변수(전역변수) : '클래스 안에 작성된' 모든 메소드에서 필드변수를 사용할 수 있음.
 	
-
-	
-	
-	
-	
-    public 자동차() {//기본(default) 생성자 <<자동차~ 메소드 이름!
+	public A() { //기본 생성자
 		/*
-		 * 기본생성자 특징
-		 * 1. 메소드이름이 클래스이름과 동일
-		 * 2. 리턴타입이 없습니다.
-		 * 3. 필드변수에 값을 초기화하기 위해 사용
+		 * 1. 생성자 이름이 클래스 이름과 동일
+		 * 2. 리턴타입이 X
 		 */
 		
 	}
 	
-    
-    /*
-     * public : 접근지정자(*public, *private, protected, default)
-     * int : 리턴 데이터 타입
-     * getNumber : 메소드 이름(동사)
-     * (int x, int y) : 파라미터 or 인자 or 인수
-     */
-    
-    public int getNumber(int x, int y) {
-    	
-    	int result = x + y;
-    	return result;//리턴을 선언했으면 리턴 데이터타입에 맞는 값을  return 해야함
-    	
-     
-    }
-    
-    /*
-     * 구매한 옷의 가격 int price가 파라미터로 주어졌을 때
-     * 지불해야 할 금액을 return하도록 getMoney 함수(메소드)로 완성하기
-     */
-    
-    
-    public int getMoney(int price) {
-    	//price금액이 50만원 이상이면 20%할인, 30만원 이상이면 10%할인, 10만원 이상이면 5%할인
-    	
-    	if(price>=500000) {
-    	    price *=0.8;
-    	}else if(price >= 300000) {
-    	    price *= 0.9;
-        }else if(price >= 100000) {
-        	price *= 0.95;
-        }   	
-        return price;
-    	 
-    }
-    	
-    /*
-     * 정수를 담고 있는 배열 arr가 파라미터로 주어졌을 때
-     * arr의 평균값을 return하는 함수 getAvg를 완성해보세요.
-     * 1. 메소드 만들어보기
-     * 2. 로직 구현	
-     */
-    	
-    /*public int getAvg (int arr) {
-    *arr[]= {10,20,30}
-    *
-    *}
-    
-    
-    return arr
- }
-    	
- 		*/
-    
-    	public double getAvg(int[] arr) {
-    		//지역변수는 초기화를 해줘야함
-    		double avg = 0;//메소드 안에 있는 변수(지역변수)
-    		double sum = 0; //총합
-    		for(int i : arr) { //for-Each
-    			sum += i;
-    		}
-    		avg = sum / arr.length; //평균값 구하기
-    		return avg;
-    	}
-    
-    	/*
-    	 * 정수를 담고 있는 배열 arr가 파라미터로 주어졌을 때
-    	 * 배열 값 중 원소가 짝수면 해당 원소를 2로 나누고 다시 해당 원소에 대입
-    	 * 최종 배열 arr를 return하는 함수 getArr를 완성해보세요.
-    	 */
-    
-    	public int[] getArr(int[] arr) {//배열도 리턴할 수 있음
-    		
-    		for(int i=0; i<arr.length; i++) {
-    			int index = arr[i]; //배열 원소값 index에 대입
-    			if(index % 2 == 0) {//해당 원소가 짝수라면?
-    				arr[i] = index / 2; //2로 나누고 다시 원소에 대입
-    			}	
-    		}
-    		
-    		return arr;
-    	}
-    	
-    	/*
-    	 * 정수를 담고 있는 배열 arr가 파라미터로 주어졌을 때
-    	 * 배열 arr에 총합을 return하는 getArrSum을 만들어보시오.
-    	 *
-    	 */
-    	
-    	public int getArrSum(int[] arr) {
-    		int sum = 0; //총합 변수
-    		for(int i : arr) {
-    			sum += i;
-    			
-    		}
-    		
-    		return sum;//총합 리턴
-    	}
-    	
-    	
-    	
-    	
-    	
-    	
-}   	
-    	
+	public A(int x) {//파라미터 값이 존재하는 생성자
+		//오버로딩으로 메소드(생성자) 이름 중복 사용 - why? 이름 짓기 어려워서...
+		this.x = x; //파라미터로 받은 값을 필드변수 'x'에 대입
+	}
+	
+	
+	/*
+	 * 리턴타입이 int인 메소드 'getNum'
+	 * 파라미터로 int x와 int y를 받습니다.
+	 * 리턴은 int형으로 해줍니다.
+	 */
+	
+	public int getNum(int x, int y) {
+		return x + y;
+		
+	}
+	
+	/*
+	 * 리턴타입이 String []인 메소드 'getArr'
+	 * 파라미터로 String []  (배열) 를 받습니다.
+	 * 리턴은 '문자형 배열'로 합니다.
+	 */
+	
+	public String[] getArr(String[] array) {
+		return array;
+	}
+	
+}
+
+
 public class 복습 {
 
 	public static void main(String[] args) {
 		
 
-		자동차 car1 = new 자동차(); 
-		//new : 클래스를 호출(인스턴스화) 클래스를 호출해서 car1에 대입(자동차=자동차 데이터타입 동일해야함)
-		//자동차() : default 생성자
-		
-		
-		int 리턴값 = car1.getNumber(10, 20);
-		System.out.println("리턴 결과 : " + 리턴값);
-		int 최종값 = car1.getMoney(340000);
-		System.out.println("결과 : " + 최종값);
-		
-		
-		int[] array = {80,90,100,100};
-		double 평균값 = car1.getAvg(array); //배열 파라미터에 넘겨주기
-		System.out.println("배열 평균값 : " + 평균값);
-		
 	}
 
 }

@@ -1,27 +1,25 @@
-package java_study_1212;
+package java_study_1219;
+
+class Animal {
+  public void makeSound() {
+  System.out.println("The animal makes a sound");
+ }
+}
 
 
-
-class Calculator{
-	int a;
-	int b;
-	
-	Calculator(int a, int b){
-		this.a = a;
-		this.b = b;
-	
+class Dog extends Animal{
+	@Override
+	public void makeSound() {
+		System.out.println("The dogs barks");
+		
 	}
 	
 }
-
 public class 문제 {
 
 	public static void main(String[] args) {
 		
 
-		
-		Calculator add = new Calculator(20, 30);
-		
 	}
 
 }
