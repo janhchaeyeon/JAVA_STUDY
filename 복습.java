@@ -1,60 +1,71 @@
-package java_study_1219;
+package java_study_1226;
 
-/*
- * 객체지향 언어(Java, C++, Python, C#...)의 특징
- */
+class Book_ {
+	String title;
+	int price = 1000;
 
-class A{//클래스 'A'
-	/*
-	 * 1. 필드변수
-	 * 2. 기본(default) 생성자
-	 * 3. 메소드
-	 * 
-	 */
-	int x; //필드변수(전역변수) : '클래스 안에 작성된' 모든 메소드에서 필드변수를 사용할 수 있음.
-	
-	public A() { //기본 생성자
-		/*
-		 * 1. 생성자 이름이 클래스 이름과 동일
-		 * 2. 리턴타입이 X
-		 */
-		
+	public Book_(String title, int price) {// 파라미터에 있는 title과 price도 지역변수
+		this.title = title;
+		this.price = price;
+
 	}
-	
-	public A(int x) {//파라미터 값이 존재하는 생성자
-		//오버로딩으로 메소드(생성자) 이름 중복 사용 - why? 이름 짓기 어려워서...
-		this.x = x; //파라미터로 받은 값을 필드변수 'x'에 대입
+
+	public void showBook() { // 메소드
+		String author = "작자미상"; // 지역변수 - showBook 메소드 안에서만 사용가능
+		System.out.println("title : " + title); // 메소드 안에서 전역변수 접근 가능
+		System.out.println("price : " + price);
+
 	}
-	
-	
-	/*
-	 * 리턴타입이 int인 메소드 'getNum'
-	 * 파라미터로 int x와 int y를 받습니다.
-	 * 리턴은 int형으로 해줍니다.
-	 */
-	
-	public int getNum(int x, int y) {
-		return x + y;
-		
+
+	public void showAuthor() {
+		String author = "작자미상";
+		int price = 100;
+		System.out.println("author : " + author);// 에러.. 똑같이 변수 만들어주면 사용 가능
+		System.out.println("title : " + title); // 전역변수는 어디든 사용 가능(단, 클래스안에서)
+		System.out.println("price : " + price);
+		System.out.println("price : " + this.price); // 전역변수(필드변수) price -> this 붙여줌
 	}
-	
-	/*
-	 * 리턴타입이 String []인 메소드 'getArr'
-	 * 파라미터로 String []  (배열) 를 받습니다.
-	 * 리턴은 '문자형 배열'로 합니다.
-	 */
-	
-	public String[] getArr(String[] array) {
-		return array;
-	}
-	
+
 }
-
 
 public class 복습 {
 
 	public static void main(String[] args) {
-		
+		/*
+		 * Book b = new Book(); b.showAuthor();
+		 */
+
+		// 자바는 클래스(객체)도 '데이터 타입'이다.
+
+		Book_[] bookList = new Book_[2]; // Book 타입을 저장하는 배열 - Book도 데이터 타입이다.
+
+		Book_ book1 = new Book_("자바의 정석", 2000);
+		bookList[0] = book1; // 0번 인덱스에 book1 대입
+		bookList[1] = new Book_("파이썬의 정석", 1000);
+
+		int priceSum = 0; // 총합 구하는 변수
+		for (Book_ b : bookList) {// 첫번째. 향상된 for문. 배열 크기만큼 반복
+			b.showBook();
+			// 1.퀴즈 책 제목이 '자바의 정석'인 책의 정보(showBook)를 출력하기
+			// 2.bookList에 저장된 책의 총 price는 얼마인지 구하기
+		}
+
+		for (int i = 0; i < 2; i++) {// 두번째 방법. 일반 for문. 조건식 만큼 반복(i<2라고 조건 제시)
+			bookList[i].showBook();
+		}
+
+		for (int i = 0; i < 2; i++) {
+			// 내코드 if(bookList[i].showBook().equals("자바의 정석"));{
+			// bookList[i].showBook();
+			if (bookList[i].title.equals("자바의 정석")) {
+				bookList[i].showBook();
+			}
+			if ("자바의 정석".equals(bookList[i].title)) {
+				bookList[i].showBook();
+			}
+			priceSum += bookList[i].price;
+		}
+		System.out.println("총합 : " + priceSum);
 
 	}
 
