@@ -1,72 +1,96 @@
-package java_study_1226;
+package java_study_1231;
 
-class Book_ {
-	String title;
-	int price = 1000;
+import java.util.Scanner;
 
-	public Book_(String title, int price) {// 파라미터에 있는 title과 price도 지역변수
-		this.title = title;
-		this.price = price;
-
+class A{//A클래스 선언
+	private int x; //전역변수 선언
+	private int y;
+	
+	
+	public int getX() { //get : 전역변수 리턴
+		return x;
 	}
-
-	public void showBook() { // 메소드
-		String author = "작자미상"; // 지역변수 - showBook 메소드 안에서만 사용가능
-		System.out.println("title : " + title); // 메소드 안에서 전역변수 접근 가능
-		System.out.println("price : " + price);
-
+	public void setX(int x) { //set : 전역변수 값 초기화
+		this.x = x;
 	}
-
-	public void showAuthor() {
-		String author = "작자미상";
-		int price = 100;
-		System.out.println("author : " + author);// 에러.. 똑같이 변수 만들어주면 사용 가능
-		System.out.println("title : " + title); // 전역변수는 어디든 사용 가능(단, 클래스안에서)
-		System.out.println("price : " + price);
-		System.out.println("price : " + this.price); // 전역변수(필드변수) price -> this 붙여줌
+	public int getY() {
+		return y;
 	}
-
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	
 }
 
 public class 복습 {
+	
 
 	public static void main(String[] args) {
-		/*
-		 * Book b = new Book(); b.showAuthor();
-		 */
-
-		// 자바는 클래스(객체)도 '데이터 타입'이다.
-
-		Book_[] bookList = new Book_[2]; // Book 타입을 저장하는 배열 - Book도 데이터 타입이다.
-
-		Book_ book1 = new Book_("자바의 정석", 2000);
-		bookList[0] = book1; // 0번 인덱스에 book1 대입
-		bookList[1] = new Book_("파이썬의 정석", 1000);
-
-		int priceSum = 0; // 총합 구하는 변수
-		for (Book_ b : bookList) {// 첫번째. 향상된 for문. 배열 크기만큼 반복
-			b.showBook();
-			// 1.퀴즈 책 제목이 '자바의 정석'인 책의 정보(showBook)를 출력하기
-			// 2.bookList에 저장된 책의 총 price는 얼마인지 구하기
+		
+		
+		//플래그(깃발)값 => true or false
+		boolean isFlag = false;
+		
+		String inputWord = "사과";// 입력받은 문자(가정)
+		
+		if(inputWord.equals("사과")){//inputWord가 '사과' 라면?
+			isFlag = true;
 		}
-
-		for (int i = 0; i < 2; i++) {// 두번째 방법. 일반 for문. 조건식 만큼 반복(i<2라고 조건 제시)
-			bookList[i].showBook();
+		if(isFlag) {
+			//플래그값을 이용해서 특정 코드를 실행할 수 있습니다.
+			System.out.println("플래그 값 변경");
+		
 		}
-
-		for (int i = 0; i < 2; i++) {
-			// 내코드 if(bookList[i].showBook().equals("자바의 정석"));{
-			// bookList[i].showBook();
-			if (bookList[i].title.equals("자바의 정석")) {
-				bookList[i].showBook();
+		
+		
+		//예시
+		
+		boolean isFlag2 = false;
+		String book[] = {"책1", "책2", "책3"}; //배열선언
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("찾을 책을 입력하세요 : ");
+		String search = scan.next(); //문자 입력받기
+		
+		for(String s : book) {
+			if(s.equals(search)) {
+				isFlag2 = true;
+				
 			}
-			if ("자바의 정석".equals(bookList[i].title)) {
-				bookList[i].showBook();
-			}
-			priceSum += bookList[i].price;
 		}
-		System.out.println("총합 : " + priceSum);
-
+		
+		if(!isFlag2) { //isFlag가 false일 때 실행하는 if 코드
+			System.out.println("입력한 도서는 해당 도서관에 없습니다.");
+		}
+		
+		
+		A a = new A(); //A클래스 호출
+		a.setX(10); //전역변수 x 10으로 초기화
+		System.out.println(a.getX()); //전역변수 x출력
+		
+		
+		
+		A []array = new A[3]; //객체배열
+		array[0] = a; //0번째 인덱스에 a 대입
+		array[0].getX(); //0번째에 들어간 A클래스 get함수 사용가능
+		
+		A b = new A();
+		b.setX(20);
+		array[1]=b; //1번째 인덱스에 b 대입
+		
+		A c = new A();
+		c.setX(30);
+		array[2]=c;
+		
+		//array에 저장된 각각의 A클래스 x 전역변수 총합을 구해볼게요.
+		int sum = 0;
+		for(A i : array) {
+			sum += i.getX();
+		}
+		
+		System.out.println("총합 : " + sum);
+		
 	}
 
 }
