@@ -1,95 +1,61 @@
-package java_study_1231;
+package java_study_0102;
 
-import java.util.Scanner;
-
-class A{//A클래스 선언
-	private int x; //전역변수 선언
-	private int y;
-	
-	
-	public int getX() { //get : 전역변수 리턴
-		return x;
-	}
-	public void setX(int x) { //set : 전역변수 값 초기화
-		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	public void setY(int y) {
-		this.y = y;
-	}
-	
-	
-}
+import java.util.ArrayList;
 
 public class 복습 {
-	
 
 	public static void main(String[] args) {
+		/*
+		 * ArrayList는 자바에서 가장 많이 사용되는 자료구조 중 하나
+		 * 일반 배열과 비슷하지만 크기가 유동적으로 변할 수 있는 '동적 배열' 이라고 생각하면 됨
+		 * 
+		 * 일반 배열은 크기가 고정된 장바구니라면
+		 * ArrayList는 필요에 따라 크기가 늘어나는 장바구니입니다.
+		 * 
+		 * ArrayList 큰 특징
+		 * 1. 일반 배열과 다르게 사이즈를 선언할 필요가 없습니다. ex) 일반 배열 : new int[7];
+		 * 2. 클래스 타입(레퍼런스 타입)만 추가할 수 있습니다. (int, double, boolean (x))
+		 */
+		ArrayList<String> shoppingList = new ArrayList<>(); //뒤의 <>안에 String 생략가능. ArrayList 생성(String 타입의 항목을 저장)
+		
+		ArrayList<Integer> list = new ArrayList<>(); //정수형을 저장할 수 있는  list
 		
 		
-		//플래그(깃발)값 => true or false
-		boolean isFlag = false;
+		//항목 추가
+		shoppingList.add("우유"); //장바구니에 물건을 넣는 것과 비슷
+		shoppingList.add("계란");
+		shoppingList.add("빵");
 		
-		String inputWord = "사과";// 입력받은 문자(가정)
-		
-		if(inputWord.equals("사과")){//inputWord가 '사과' 라면?
-			isFlag = true;
-		}
-		if(isFlag) {
-			//플래그값을 이용해서 특정 코드를 실행할 수 있습니다.
-			System.out.println("플래그 값 변경");
-		
-		}
-		
-		
-		//예시
-		
-		boolean isFlag2 = false;
-		String book[] = {"책1", "책2", "책3"}; //배열선언
-		Scanner scan = new Scanner(System.in);
-		
-		System.out.print("찾을 책을 입력하세요 : ");
-		String search = scan.next(); //문자 입력받기
-		
-		for(String s : book) {
-			if(s.equals(search)) {
-				isFlag2 = true;
-				
-			}
+		//장바구니에 있는 모든 항목을 출력
+		System.out.println("장바구니 내용 : " + shoppingList);
+		//장바구니에 있는 항목 하나씩 출력하기
+		for(String s : shoppingList) {
+			System.out.println("장바구니 내용 : " + s);
+			
 		}
 		
-		if(!isFlag2) { //isFlag가 false일 때 실행하는 if 코드
-			System.out.println("입력한 도서는 해당 도서관에 없습니다.");
+		//특정 위치에 항목 추가
+		shoppingList.add(1, "치즈");
+		//수정된 장바구니 내용 출력
+		System.out.println("장바구니 내용 : " + shoppingList);
+		
+		
+		//항목 개수 확인
+		System.out.println("장바구니에 담긴 항목 수  : " + shoppingList.size());
+		
+		//특정 항목이 있는지 확인
+		if(shoppingList.contains("빵")) {
+			System.out.println("빵이 장바구니에 있습니다.");
+		}else {
+			System.out.println("빵은 장바구니에 없습니다.");
 		}
 		
+		//특정 항목 제거
+		shoppingList.remove("계란"); //장바구니에서 특정 물건을 빼내는 것과 같다.
+		//최종 장바구니 내용 출력
+		System.out.println("최종 장바구니 : " + shoppingList);
 		
-		A a = new A(); //A클래스 호출
-		a.setX(10); //전역변수 x 10으로 초기화
-		System.out.println(a.getX()); //전역변수 x출력
 		
-		
-		
-		A []array = new A[3]; //객체배열
-		array[0] = a; //0번째 인덱스에 a 대입
-		array[0].getX(); //0번째에 들어간 A클래스 get함수 사용가능
-		
-		A b = new A();
-		b.setX(20);
-		array[1]=b; //1번째 인덱스에 b 대입
-		
-		A c = new A();
-		c.setX(30);
-		array[2]=c;
-		
-		//array에 저장된 각각의 A클래스 x 전역변수 총합을 구해볼게요.
-		int sum = 0;
-		for(A i : array) {
-			sum += i.getX();
-		}
-		
-		System.out.println("총합 : " + sum);
 		
 	}
 
